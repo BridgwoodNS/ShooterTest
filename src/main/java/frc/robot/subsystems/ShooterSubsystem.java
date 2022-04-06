@@ -26,7 +26,6 @@ public class ShooterSubsystem extends SubsystemBase {
   /** Creates a new ShooterSubsystem. */
   public ShooterSubsystem() {
 
-
     bottom.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor,0, 10); //Read more into timeout Param
     top.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 10);
 
@@ -45,16 +44,22 @@ public class ShooterSubsystem extends SubsystemBase {
     bottom.set(ControlMode.Velocity, SmartDashboard.getNumber("Top Velocity", 0));
     top.set(ControlMode.Velocity, SmartDashboard.getNumber("Bottom Velocity", 0));
 
+    bottom.config_kF(0, SmartDashboard.getNumber("Bottom kF", 0.0451));
+    bottom.config_kP(0, SmartDashboard.getNumber("Bottom kP", 0.010005));
+    bottom.config_kI(0, SmartDashboard.getNumber("Botttom kI", 0.0000009536743));
+    bottom.config_kD(0, SmartDashboard.getNumber("Bottom kD", 0.000006));
+    
+    top.config_kF(0, SmartDashboard.getNumber("Top kF", 0.0451));
+    top.config_kP(0, SmartDashboard.getNumber("Top kP", 0.010005));
+    top.config_kI(0, SmartDashboard.getNumber("Top kI", 0.0000009536743));
+    top.config_kD(0, SmartDashboard.getNumber("Top kD", 0.000006));
 
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-
     SmartDashboard.putNumber("Recorded Top Velocity", top.getSelectedSensorVelocity());
     SmartDashboard.putNumber("Recorded Bottom Velocity", bottom.getSelectedSensorVelocity());
-
-
   }
 }
